@@ -1,0 +1,14 @@
+.banner-container {
+  background-color: green;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  // background-attachment: fixed;
+
+  .desc-container {
+    position: absolute;
+  }
+}

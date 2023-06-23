@@ -1,0 +1,13 @@
+@import "./Style/mixin";
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: primeFont();
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  font-size: $font-size;
+  background-color: $primary-color;
+  color: $white-color;
+}
