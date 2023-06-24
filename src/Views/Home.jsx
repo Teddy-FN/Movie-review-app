@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllListMovie } from "../redux/getMovie";
 import Banner from "../Component/Banner";
+import Header from "../Component/Header/Header";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Home = () => {
 
   return (
     <Fragment>
+      <Header />
       <Banner />
       {ListMovieUpcoming}
     </Fragment>
