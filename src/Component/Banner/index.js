@@ -6,13 +6,11 @@ const Banner = () => {
     <section
       style={{
         backgroundImage: `url(${BannerImage})`,
+        zIndex: 0,
       }}
       className="banner-container"
     >
-      <div className="desc-container">
-        <h1>HELLO</h1>
-      </div>
-      {/* <img src={BannerImage} alt="banner" /> */}
+      <img src={BannerImage} alt="banner" />
     </section>
   );
 };

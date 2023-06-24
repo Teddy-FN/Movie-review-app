@@ -12,7 +12,6 @@ const PageNotFound = lazy(() => import("./Views/NotFound"));
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Suspense>
         <Routes>
           <Route path="/" element={<HomePages />} />

@@ -1,65 +1,203 @@
 @import "../../Style/mixin";
 
+@mixin breakpoint($point) {
+  @if $point == "md" {
+    // 768px
+    @media (min-width: 48em) {
+      @content;
+    }
+  }
+}
+
 .header {
   // background-color: red;
-  padding: 1rem 3.333rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1.667rem;
+  padding: 1rem 3rem;
+  width: 100%;
+  transition: 0.3s ease all;
+  height: 100px;
 
-  img {
-    width: 10%;
-    // height: auto;
+  // mobile size
+  @include breakpoint("md") {
+    padding: 0 3rem;
   }
 
-  // Input
-  .search-container {
-    width: 100%;
-    padding: 1.2rem 1.7rem;
-    border: 2px solid $grape-fade;
-    border-radius: 100px;
+  &_content {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.6rem;
+    gap: 1.667rem;
+    height: 100%;
+    position: relative;
 
-    input {
-      display: inline-block;
-      height: 25px;
+    img {
+      width: 15%;
+      height: auto;
+
+      @include breakpoint("md") {
+        width: 5%;
+        height: auto;
+      }
+    }
+
+    // Input
+    &_search_container {
       width: 100%;
-      // background-color: green;
-      border: none;
+      padding: 1.2rem 1.7rem;
+      border: 2px solid $grape-fade;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+
+      input {
+        display: inline-block;
+        height: 25px;
+        flex: 1;
+        // background-color: green;
+        border: none;
+      }
+
+      input:focus {
+        outline: none !important;
+        color: $white-color;
+        font-size: 1.5rem;
+      }
     }
 
-    input:focus {
-      outline: none !important;
-      color: $white-color;
-      font-size: 1.5rem;
+    &_nav {
+      top: 0;
+      right: 100%;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      // text-align: center;
+      // background-color: red;
+      background: rgba(rgb(32, 32, 32), 0.9);
+      z-index: 100;
+      backdrop-filter: blur(2px);
+      transform: translate(0);
+      transition: 0.3s ease transform;
+
+      @include breakpoint(md) {
+        transform: none;
+        flex-direction: row;
+        background: transparent;
+        width: 40%;
+        height: 100%;
+        position: static;
+      }
+
+      &.isMenu {
+        transform: translate(100%);
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 32px;
+        // background-color: red;
+        @include breakpoint(md) {
+          flex-direction: row;
+          align-items: center;
+          margin-bottom: 0;
+          margin-right: calc(0.5rem + #{16px});
+        }
+        li {
+          &:not(:last-child) {
+            margin-bottom: 32px;
+            @include breakpoint(md) {
+              margin-bottom: 0;
+              margin-right: 16px;
+            }
+          }
+          a {
+            text-decoration: none;
+            color: inherit;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            transition: 0.3s ease all;
+
+            &:hover {
+              background: rgba(#fff, 0.1);
+            }
+            &:active {
+              border-radius: calc(#{12px} + 6px);
+              background: linear-gradient(rgba(#fff, 0.1), rgba(#fff, 0.2));
+            }
+          }
+        }
+
+        .btn {
+          cursor: pointer;
+          outline: none;
+          padding: 0.75rem 1.25rem;
+          border-radius: 12px;
+          // font-size: 1rem;
+          font-family: inherit;
+          // background: rgb(162, 162, 246);
+          // color: rgb(32, 32, 32);
+          // border: 1px solid transparent;
+          transition: 0.3s ease all;
+          margin: 0.5em 0.5em;
+
+          // button
+          &.login {
+            background-color: $green-color;
+            padding: 1.2rem;
+            // flex: 0.8;
+            width: auto;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+          }
+
+          &.notification {
+            padding: 0.833rem;
+            border-radius: 100px;
+            flex: 0.12;
+            border: 2px solid $grape-fade;
+            cursor: pointer;
+
+            .icon {
+              color: $grape-fade;
+              justify-content: center;
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+      }
     }
-  }
 
-  // button
-  .login {
-    background-color: $green-color;
-    padding: 1.2rem;
-    width: 25%;
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-  }
+    // Burger Navigation
+    &_burger_navigation {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      font-size: 2rem;
+      transition: 0.3s ease all;
+      position: relative;
+      z-index: 100;
+      background-color: transparent;
 
-  .notification {
-    padding: 0.833rem;
-    border-radius: 100px;
-    border: 2px solid $grape-fade;
-    cursor: pointer;
+      &:hover {
+        color: $white-color;
+      }
 
-    .icon {
-      color: $grape-fade;
+      @include breakpoint(md) {
+        display: none;
+      }
     }
   }
 }
