@@ -8,6 +8,11 @@
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
   font-size: $font-size;
-  background-color: $primary-color;
+
   color: $white-color;
+}
+
+body,
+input {
+  background-color: $primary-color;
 }
