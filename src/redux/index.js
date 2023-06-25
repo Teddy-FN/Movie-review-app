@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import getMovieListReducer from "./getMovie";
+// import getMovieListReducer from "./getMovie";
+import getMovieCarouselListReducer from "./getListCarousel";
 
 export const store = configureStore({
   reducer: {
-    getMovie: getMovieListReducer,
+    // getMovie: getMovieListReducer,
+    getCarousel: getMovieCarouselListReducer,
   },
 });

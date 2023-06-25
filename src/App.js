@@ -13,6 +13,7 @@ function App() {
   return (
     <BrowserRouter>
       <Suspense>
+        <Header />
         <Routes>
           <Route path="/" element={<HomePages />} />
           <Route path="detail" element={<DetailMoviePage />} />
