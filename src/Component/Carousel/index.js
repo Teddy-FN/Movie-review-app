@@ -69,7 +69,7 @@ const Carousel = () => {
               className="carousel"
               key={idx}
               style={{
-                height: "150vh",
+                height: "140vh",
                 width: "100%",
                 backgroundImage: `linear-gradient(to right, rgba(43, 27, 46, 1), rgba(43, 27, 46, 0)) ,url(https://image.tmdb.org/t/p/w1280/${items?.backdrop_path})`,
                 backgroundRepeat: "no-repeat",
@@ -77,6 +77,7 @@ const Carousel = () => {
                 position: "left",
                 display: "flex",
                 justifyContent: "start",
+                backgroundPosition: "center",
                 padding: 30,
               }}
             >

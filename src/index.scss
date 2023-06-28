@@ -1,18 +1,32 @@
 @import "./Style/mixin";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&display=swap");
 
 * {
   margin: 0;
   padding: 0;
-  font-family: primeFont();
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Poppins", sans-serif;
+  // font-family: primeFont();
   box-sizing: border-box;
   font-size: $font-size;
 
   color: $white-color;
 }
 
-body,
-input {
+body {
   background-color: $primary-color;
+  height: 100%;
+}
+
+input,
+button {
+  background-color: transparent;
+}
+
+li {
+  list-style: none;
+}
+
+// Global
+.container {
+  padding: 1rem 3rem;
 }
