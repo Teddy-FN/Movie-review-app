@@ -48,7 +48,7 @@ const Header = () => {
 
   return (
     <Fragment>
-      <header className="header">
+      <header className="header container">
         <section className="header_content">
           <img src={CinemaLogo} alt="cinema_logo" />
           <div className="header_content_search_container">

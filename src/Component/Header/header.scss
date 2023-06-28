@@ -11,10 +11,12 @@
 
 .header {
   // background-color: red;
-  padding: 1rem 3rem;
+  // padding: 1rem 3rem;
   width: 100%;
   transition: 0.3s ease all;
   height: 100px;
+  position: fixed; // Its want header not fixed just delete it
+  z-index: 10;
 
   // mobile size
   @include breakpoint("md") {
@@ -27,7 +29,6 @@
     align-items: center;
     gap: 1.667rem;
     height: 100%;
-    position: relative;
 
     img {
       width: 15%;

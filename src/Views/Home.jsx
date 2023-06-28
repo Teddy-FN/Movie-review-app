@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllListMovie } from "../redux/getMovie";
 import { MemoizedCarousel } from "../Component/Carousel";
+import MoviesList from "../UI/MoviesList";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -25,31 +26,15 @@ const Home = () => {
   // }, [listAllMovies]);
 
   return (
-    <Fragment>
+    <div
+      style={{
+        position: "relative",
+      }}
+    >
       <MemoizedCarousel />
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
-      <h1>HELLO</h1>
+      <MoviesList />
       {/* {ListMovieUpcoming} */}
-    </Fragment>
+    </div>
   );
 };
 
