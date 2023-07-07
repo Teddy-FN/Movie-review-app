@@ -1,11 +1,10 @@
 import axios from "axios";
 
-const url = "https://moviesdatabase.p.rapidapi.com/titles/x/upcoming?page=1";
-const options = {
+export const URL_API = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
   headers: {
-    "X-RapidAPI-Key": "d576ea0a05msha2c709ebd83281cp187d1cjsna7a85b900e39",
-    "X-RapidAPI-Host": "moviesdatabase.p.rapidapi.com",
+    accept: "application/json",
+    Authorization: `Bearer ${process.env.REACT_APP_BASE_TOKEN}`,
   },
-};
-
-export const URL_API = (method, url, body = {}) => {};
+  timeout: 5000,
+});

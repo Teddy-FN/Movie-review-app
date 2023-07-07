@@ -1,5 +1,14 @@
 @import "../../Style/mixin";
 
+@mixin breakpoint($point) {
+  @if $point == "md" {
+    // 768px
+    @media (min-width: 48em) {
+      @content;
+    }
+  }
+}
+
 .movie_list {
   position: absolute;
   width: 100%;
@@ -11,24 +20,29 @@
   &_genre_container {
     background: rgba(43, 27, 46, 0.6);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin: auto;
     gap: 1rem;
     width: 68%;
-    border-radius: 40px;
+    border-radius: 3rem;
+    flex-wrap: wrap;
     overflow: hidden;
+
+    @include breakpoint("md") {
+      flex-direction: row;
+    }
 
     h3 {
       color: $green-color;
-      font-size: 2.5rem;
+      font-size: 2.5vw;
       font-weight: 400;
     }
 
     p {
       color: $green-color;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
     }
 
     &_list {
@@ -37,6 +51,7 @@
       flex-direction: row;
       justify-content: space-evenly;
       gap: 1rem;
+      flex-wrap: wrap;
 
       .list_items button {
         background-color: transparent;
@@ -47,7 +62,7 @@
         border: 1px solid $green-color;
         padding: 1rem;
         border-radius: 50px;
-        font-size: 2rem;
+        font-size: 1.5em;
       }
 
       .list_items button.list_items_toggle_active {
@@ -59,7 +74,7 @@
         border: 1px solid $green-color;
         padding: 1rem;
         border-radius: 50px;
-        font-size: 2rem;
+        font-size: 1.5em;
       }
     }
   }

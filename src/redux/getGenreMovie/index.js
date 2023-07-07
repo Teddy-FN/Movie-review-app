@@ -1,14 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const url = "https://api.themoviedb.org/3/genre/movie/list?language=en";
-const options = {
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMDZhYjdhNjM3Nzk0M2QzNjZmMTkxNzExMjM3NGZmMiIsInN1YiI6IjYwNzY1ZmE2MWRhN2E2MDA3NzNkYjZiZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.76pWuO7P1zX-gVW4I3QJBM7AjwmXPXB1nUZi6UKwD0w",
-  },
-};
+import { URL_API } from "../../Service/Axios";
 
 const initialState = {
   data: [],
@@ -44,13 +35,12 @@ export default getAllGenreMovie.reducer;
 export const fetchGenreListMovies = () => async (dispatch) => {
   dispatch(loadingGetList("loading"));
   try {
-    const getGenreMovie = await axios.get(url, options);
+    const getGenreMovie = await URL_API.get("/3/genre/movie/list?language=en");
     console.log("getGenreMovie =>", getGenreMovie);
     if (getGenreMovie.status === 200) {
       dispatch(loadingGetList("succeeded"));
       dispatch(getAllList(getGenreMovie.data.genres));
     }
-    console.log(getGenreMovie);
   } catch (error) {
     dispatch(loadingGetList("failed"));
   }
