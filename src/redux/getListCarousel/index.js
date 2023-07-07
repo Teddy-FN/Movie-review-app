@@ -1,15 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const url =
-  "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
-const options = {
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMDZhYjdhNjM3Nzk0M2QzNjZmMTkxNzExMjM3NGZmMiIsInN1YiI6IjYwNzY1ZmE2MWRhN2E2MDA3NzNkYjZiZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.76pWuO7P1zX-gVW4I3QJBM7AjwmXPXB1nUZi6UKwD0w",
-  },
-};
+import { URL_API } from "../../Service/Axios";
 
 const initialState = {
   data: [],
@@ -45,13 +35,13 @@ export default getCarouselListMovies.reducer;
 export const fetchCarouselListMovies = () => async (dispatch) => {
   dispatch(loadingGetList("loading"));
   try {
-    const getListData = await axios.get(url, options);
-    console.log("getListData =>", getListData);
+    const getListData = await URL_API.get(
+      "/3/movie/top_rated?language=en-US&page=1"
+    );
     if (getListData.status === 200) {
       dispatch(loadingGetList("succeeded"));
       dispatch(getAllList(getListData.data.results));
     }
-    console.log(getListData);
   } catch (error) {
     dispatch(loadingGetList("failed"));
   }

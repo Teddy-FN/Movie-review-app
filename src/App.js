@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./index.scss";
 import Header from "./Component/Header/Header";
@@ -17,7 +17,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="detail" element={<DetailMoviePage />} />
+          <Route path="detail/:id" element={<DetailMoviePage />} />
           <Route path="genre" element={<GenrePage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

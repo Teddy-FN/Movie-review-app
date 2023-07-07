@@ -1,5 +1,14 @@
 @import "../../Style/mixin";
 
+@mixin breakpoint($point) {
+  @if $point == "md" {
+    // 768px
+    @media (min-width: 48em) {
+      @content;
+    }
+  }
+}
+
 .carousel_content {
   display: flex;
   justify-content: center;
@@ -11,13 +20,13 @@
   gap: 20px;
 
   &_title {
-    font-size: 28px;
+    font-size: 1.75rem;
     font-weight: 400;
     line-height: 30px;
   }
 
   &_overview {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 400;
     line-height: 30px;
   }
@@ -25,8 +34,13 @@
   .play {
     background-color: $green-color;
     padding: 1.2rem;
+    width: 80%;
 
-    width: 20%;
+    // mobile size
+    @include breakpoint("md") {
+      width: 20%;
+    }
+
     border-radius: 100px;
     border: none;
     cursor: pointer;

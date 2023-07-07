@@ -1,17 +1,26 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useMemo, useRef } from "react";
+
+// Link
+import { Link } from "react-router-dom";
+
 // Style
 import "./header.scss";
+
 // Image
 import CinemaLogo from "../../Assets/Img/cinema_logo.png";
+
 // Icon
 import { AiFillBell } from "@react-icons/all-files/ai/AiFillBell";
 import { AiOutlineQrcode } from "@react-icons/all-files/ai/AiOutlineQrcode";
 import { AiOutlineSearch } from "@react-icons/all-files/ai/AiOutlineSearch";
+
 // Burger navigation Icon
 import { AiOutlineMenu } from "@react-icons/all-files/ai/AiOutlineMenu";
 import { AiOutlineMenuUnfold } from "@react-icons/all-files/ai/AiOutlineMenuUnfold";
 
 const Header = () => {
+  const searchText = useRef("");
+
   const [size, setSize] = useState({
     width: 0,
     height: 0,
@@ -36,7 +45,6 @@ const Header = () => {
 
   // get resize and change state open
   useEffect(() => {
-    console.log("SIZE => =>", size);
     if (size.width > 768 && open) {
       setOpen(false);
     }
@@ -46,14 +54,44 @@ const Header = () => {
     setOpen((setValue) => !setValue);
   };
 
+  const BURGER_NAVIGATION = useMemo(() => {
+    if (!open) {
+      return (
+        <AiOutlineMenu
+          onClick={handlerOpenBurgerNavigation}
+          size={40}
+          fill="#573b5c"
+        />
+      );
+    } else {
+      return (
+        <AiOutlineMenuUnfold
+          onClick={handlerOpenBurgerNavigation}
+          size={40}
+          fill="#573b5c"
+        />
+      );
+    }
+  }, [open]);
+
   return (
     <Fragment>
       <header className="header container">
         <section className="header_content">
-          <img src={CinemaLogo} alt="cinema_logo" />
+          <Link to="/" className="header_content_logo">
+            <img src={CinemaLogo} alt="cinema_logo" />
+          </Link>
           <div className="header_content_search_container">
             <AiOutlineSearch size={28} className="search-icon" fill="#573b5c" />
-            <input type="text" placeholder="Search" />
+            <input
+              type="text"
+              placeholder="Search"
+              onChange={(e) => {
+                searchText.current = e.target.value;
+              }}
+              ref={searchText}
+              value={searchText.current.value}
+            />
           </div>
           <nav
             className={`${"header_content_nav"} 
@@ -79,10 +117,12 @@ const Header = () => {
                       }}
                     />
                   </div>
+
                   {/* Tablet Resolution */}
                   {size.width === 0 || size.width > 1200
                     ? `Easy Login by Phone`
                     : null}
+
                   {/* Mobile Resolution */}
                   {size.width < 768 && open ? `Easy Login by Phone` : null}
                 </button>
@@ -97,19 +137,7 @@ const Header = () => {
 
           {/* burger Navigation icon */}
           <section className="header_content_burger_navigation">
-            {!open ? (
-              <AiOutlineMenu
-                onClick={handlerOpenBurgerNavigation}
-                size={40}
-                fill="#573b5c"
-              />
-            ) : (
-              <AiOutlineMenuUnfold
-                onClick={handlerOpenBurgerNavigation}
-                size={40}
-                fill="#573b5c"
-              />
-            )}
+            {BURGER_NAVIGATION}
           </section>
         </section>
       </header>

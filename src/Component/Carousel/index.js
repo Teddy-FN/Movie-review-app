@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect, useMemo, memo } from "react";
+
 // Styles
 import "./carousel.scss";
+
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCarouselListMovies } from "../../redux/getListCarousel";
@@ -22,7 +24,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 const Carousel = () => {
   const dispatch = useDispatch();
   const listCarousel = useSelector((state) => {
-    console.log("STATE =>", state);
     return {
       data: state.getCarousel.data,
       loading: state.getCarousel.loading,
@@ -34,9 +35,7 @@ const Carousel = () => {
     return () => {
       dispatch(fetchCarouselListMovies());
     };
-  }, []);
-
-  console.log("listCarousel =>", listCarousel);
+  }, [dispatch]);
 
   const CONTENT_CAROUSEL = useMemo(() => {
     if (listCarousel.loading) {
@@ -81,31 +80,16 @@ const Carousel = () => {
                 padding: 30,
               }}
             >
-              {listCarousel.loading && (
-                <Skeleton
-                  highlightColor="#2b1b2e"
-                  baseColor="#573b5c"
-                  height={550}
-                  count={3}
-                  enableAnimation
-                  duration={0.5}
-                  width={50}
+              <div className="carousel_content">
+                <LazyLoadImage
+                  alt={items.poster_path}
+                  effect="blur"
+                  src={`https://image.tmdb.org/t/p/w154/${items.poster_path}`}
                 />
-              )}
-              {!listCarousel.loading && (
-                <div className="carousel_content">
-                  <LazyLoadImage
-                    alt={items.poster_path}
-                    effect="blur"
-                    src={`https://image.tmdb.org/t/p/w154/${items.poster_path}`}
-                  />
-                  <p className="carousel_content_title">
-                    {items.original_title}
-                  </p>
-                  <p className="carousel_content_overview">{items.overview}</p>
-                  <button className="btn play">Play</button>
-                </div>
-              )}
+                <p className="carousel_content_title">{items.original_title}</p>
+                <p className="carousel_content_overview">{items.overview}</p>
+                <button className="btn play">Play</button>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
