@@ -1,112 +1,74 @@
-import React, { useMemo, useEffect, Fragment, useState } from "react";
-
-// Redux / Fetching data
-import { useSelector, useDispatch } from "react-redux";
-import { fetchGenreListMovies } from "../../redux/getGenreMovie";
+import React, { useMemo } from "react";
+import "./moviesList.scss";
 
 // Styled
 import "./moviesList.scss";
 
 // Import React router Dom
-import { Link } from "react-router-dom";
 
-const DEFAULT_GENRE = [
-  { id: 28, name: "Action" },
-  { id: 12, name: "Adventure" },
-  { id: 16, name: "Animation" },
-  {
-    id: 878,
-    name: "Science Fiction",
-  },
-];
+import ReactStars from "react-rating-stars-component";
 
-const MoviesList = () => {
-  const dispatch = useDispatch();
-  const [toogle, setToogle] = useState({ id: 28, name: "Action" });
-  // const listAllGenreMovie = useSelector((state) => ({
-  //   data: state.getGenreMovie.data,
-  //   loading: state.getGenreMovie.loading,
-  //   error: state.getGenreMovie.error,
-  // }));
+// Lazy Load Image Component
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-  useEffect(() => {
-    console.log("toogle =>", toogle);
-    dispatch(fetchGenreListMovies());
-  }, []);
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-  const onChangeToogle = (item) => {
-    console.log("ITEM =>", item);
-    setToogle(() => {
-      return {
-        id: item.id,
-        name: item.name,
-      };
-    });
-  };
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  const LIST_ALL_GENRE = useMemo(() => {
-    const component = DEFAULT_GENRE.map((items, idx) => {
-      console.log("TOOGLE =>", toogle);
-      return (
-        <li className="list_items">
-          <button
-            onClick={() => onChangeToogle(items)}
-            key={idx}
-            className={`${
-              toogle.id === items.id && toogle.name === items.name
-                ? "list_items_toggle_active"
-                : ""
-            }`}
-          >
-            {items.name}
-          </button>
-        </li>
-      );
-    });
+const MoviesList = (props) => {
+  const ListMovieUpcoming = useMemo(() => {
+    if (props.data.loading)
+      arr.map((items, index) => {
+        return (
+          <Skeleton
+            key={index}
+            highlightColor="#2b1b2e"
+            baseColor="#573b5c"
+            height={600}
+            count={5}
+            enableAnimation
+            duration={1}
+          />
+        );
+      });
 
-    return component;
-  }, [DEFAULT_GENRE, toogle]);
+    if (props.data.data)
+      return props.data?.data?.map((items, idx) => {
+        return (
+          <div key={idx} className="movie_list_container_card">
+            <LazyLoadImage
+              alt={items.poster_path}
+              effect="blur"
+              width={250}
+              height="auto"
+              src={"https://image.tmdb.org/t/p/original/" + items.poster_path}
+            />
+            <div
+              style={{
+                alignSelf: "start",
+                marginTop: "20px",
+                marginBottom: "20px",
+              }}
+            >
+              <p>{items.title}</p>
+              <ReactStars
+                count={10}
+                value={items.vote_average}
+                edit={false}
+                size={16}
+                activeColor="#ffd700"
+              />
+            </div>
+          </div>
+        );
+      });
+  }, [props.data]);
 
   return (
-    <section className="movie_list container">
-      <section className="movie_list_genre_container container">
-        <h3>Genres</h3>
-        <ul className="movie_list_genre_container_list">{LIST_ALL_GENRE}</ul>
-        <Link to="/genre">
-          <p>More</p>
-        </Link>
-      </section>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
-      <h3>Genres</h3>
+    <section className="container">
+      <h1 className="movie_genre_text">{props.toogle.name} Movies</h1>
+      <section className="movie_list_container">{ListMovieUpcoming}</section>
     </section>
   );
 };

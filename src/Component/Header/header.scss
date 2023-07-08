@@ -14,7 +14,7 @@
   transition: 0.3s ease all;
   height: 100px;
   position: fixed; // Its want header not fixed just delete it
-  z-index: 10;
+  z-index: 3;
 
   // mobile size
   @include breakpoint("md") {
@@ -85,7 +85,7 @@
       justify-content: center;
       align-items: center;
       background: rgba(rgb(32, 32, 32), 0.9);
-      z-index: 100;
+      z-index: 2;
       backdrop-filter: blur(2px);
       transform: translate(0);
       transition: 0.3s ease transform;
@@ -192,7 +192,7 @@
       font-size: 2rem;
       transition: 0.3s ease all;
       position: relative;
-      z-index: 100;
+      z-index: 2;
       background-color: transparent;
 
       &:hover {

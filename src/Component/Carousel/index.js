@@ -97,7 +97,12 @@ const Carousel = () => {
     }
   }, [listCarousel]);
 
-  return <Fragment>{CONTENT_CAROUSEL}</Fragment>;
+  return (
+    <Fragment>
+      {CONTENT_CAROUSEL}
+      
+    </Fragment>
+  );
 };
 
 export const MemoizedCarousel = memo(Carousel);
