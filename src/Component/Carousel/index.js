@@ -1,4 +1,7 @@
-import React, { Fragment, useEffect, useMemo, memo } from "react";
+import React, { useEffect, useMemo, memo } from "react";
+
+import ToogleGenre from "../../UI/ToogleGenre";
+import Container from "../Container";
 
 // Styles
 import "./carousel.scss";
@@ -21,7 +24,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 // Lazy Load Image Component
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const Carousel = () => {
+const Carousel = (props) => {
   const dispatch = useDispatch();
   const listCarousel = useSelector((state) => {
     return {
@@ -98,10 +101,10 @@ const Carousel = () => {
   }, [listCarousel]);
 
   return (
-    <Fragment>
+    <Container>
       {CONTENT_CAROUSEL}
-      
-    </Fragment>
+      <ToogleGenre listGenre={props.listGenre} />
+    </Container>
   );
 };
 

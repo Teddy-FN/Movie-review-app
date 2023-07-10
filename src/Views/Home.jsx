@@ -2,8 +2,6 @@ import React, { useMemo, useEffect, useState } from "react";
 import { MemoizedCarousel } from "../Component/Carousel";
 import MoviesList from "../UI/MoviesList";
 
-import ToogleGenre from "../UI/ToogleGenre";
-
 // Redux / Fetching data
 import { useSelector, useDispatch } from "react-redux";
 import { fetchGenreListMovies } from "../redux/getGenreMovie";
@@ -78,14 +76,7 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <div
-        style={{
-          position: "relative",
-        }}
-      >
-        <MemoizedCarousel />
-        <ToogleGenre listGenre={LIST_ALL_GENRE} />
-      </div>
+      <MemoizedCarousel listGenre={LIST_ALL_GENRE} />
       <MoviesList
         data={listAllMovies}
         toogle={toogle}
