@@ -9,21 +9,27 @@
   }
 }
 
+.list_container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
 .movie_list_container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
+
 .movie_list_container_card {
   flex: 0 1 20%;
+
+  .poster {
+    max-height: 320px;
+  }
 }
 
-//   .pagination {
-//     display: flex;
-//     list-style: none;
-//     justify-content: center;
-//     align-items: center;
-//     font-size: 1.2rem;
-//     gap: 5px;
-//   }
+.movie_genre_text {
+  font-size: 4rem;
+}
