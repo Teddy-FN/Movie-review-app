@@ -5,6 +5,7 @@ const initialState = {
   data: [],
   error: null,
   loading: false,
+  pagination: 0,
 };
 
 export const getMovieList = createSlice({
@@ -23,28 +24,41 @@ export const getMovieList = createSlice({
     getAllList: (state, payload) => {
       state.data = payload.payload;
     },
+
+    getAllListPage: (state, payload) => {
+      state.pagination = payload.payload;
+    },
   },
 });
 
 // // Export Actions
-export const { getAllList, loadingGetList } = getMovieList.actions;
+export const { getAllList, loadingGetList, getAllListPage } =
+  getMovieList.actions;
 
 // // Export Reducer
 export default getMovieList.reducer;
 
 // FETCHING DATA
-export const fetchAllListMovie = (props) => async (dispatch) => {
-  console.log("props", props);
-  dispatch(loadingGetList("loading"));
-  try {
-    const getListData = await URL_API.get(
-      `/3/movie/${props.id}/recommendations?language=en-US&page=1`
-    );
-    if (getListData.status === 200) {
-      dispatch(loadingGetList("succeeded"));
-      dispatch(getAllList(getListData.data.results));
+export const fetchAllListMovie =
+  ({ id, page }) =>
+  async (dispatch) => {
+    console.log("page WKWKKW =>", page++);
+    dispatch(loadingGetList("loading"));
+    try {
+      const getListData = await URL_API.get(
+        `/3/movie/${id}/recommendations?language=en-US&page=${page++}`
+      );
+      if (getListData.status === 200) {
+        dispatch(loadingGetList("loading"));
+
+        setTimeout(() => {
+          // console.log("getListData =>", getListData);
+          dispatch(loadingGetList("succeeded"));
+          dispatch(getAllList(getListData.data.results));
+          dispatch(getAllListPage(getListData.data.total_pages));
+        }, 3000);
+      }
+    } catch (error) {
+      dispatch(loadingGetList("failed"));
     }
-  } catch (error) {
-    dispatch(loadingGetList("failed"));
-  }
-};
+  };
