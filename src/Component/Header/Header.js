@@ -79,7 +79,27 @@ const Header = () => {
       <header className="header container">
         <section className="header_content">
           <Link to="/" className="header_content_logo">
-            <img src={CinemaLogo} alt="cinema_logo" />
+            <img src={CinemaLogo} alt="cinema_logo" width={100} height="auto" />
+            {/* <picture>
+              <source
+                media="(max-width: 799px)"
+                srcset="puppy-480w-cropped.jpg"
+                width={480}
+                height={400}
+              />
+              <source
+                media="(min-width: 800px)"
+                srcset="puppy-800w.jpg"
+                width={800}
+                height={400}
+              />
+              <img
+                src="puppy-800w.jpg"
+                alt="Puppy with balloons"
+                width={800}
+                height={400}
+              />
+            </picture> */}
           </Link>
           <div className="header_content_search_container">
             <AiOutlineSearch size={28} className="search-icon" fill="#573b5c" />
