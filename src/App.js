@@ -7,7 +7,7 @@ import Header from "./Component/Header/Header";
 // Pages
 const HomePage = lazy(() => import("./Views/Home"));
 const GenrePage = lazy(() => import("./Views/Genre/Genre"));
-const DetailMoviePage = lazy(() => import("./Views/Detail"));
+const DetailMoviePage = lazy(() => import("./Views/Detail/Detail"));
 const PageNotFound = lazy(() => import("./Views/NotFound"));
 
 function App() {

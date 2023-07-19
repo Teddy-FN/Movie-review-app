@@ -3,7 +3,7 @@ import "./container.scss";
 
 const Container = (props) => {
   const className = `${props.class} containerWrapper`;
-  return <div className={className}>{props.children}</div>;
+  return <section className={className}>{props.children}</section>;
 };
 
 export default Container;

@@ -19,14 +19,15 @@ import { AiOutlineMenu } from "@react-icons/all-files/ai/AiOutlineMenu";
 import { AiOutlineMenuUnfold } from "@react-icons/all-files/ai/AiOutlineMenuUnfold";
 
 const Header = () => {
+  // Optimizing use ref
   const searchText = useRef("");
+  const open = useRef(false);
+  // const [open, setOpen] = useState(false);
 
   const [size, setSize] = useState({
     width: 0,
     height: 0,
   });
-  // Optimizing use ref
-  const [open, setOpen] = useState(false);
 
   // For burger Navigation from height / size screen
   useEffect(() => {
@@ -45,17 +46,18 @@ const Header = () => {
 
   // get resize and change state open
   useEffect(() => {
-    if (size.width > 768 && open) {
-      setOpen(false);
+    if (size.width > 768 && open.current) {
+      open.current = false;
     }
   }, [size, open]);
 
   const handlerOpenBurgerNavigation = () => {
-    setOpen((setValue) => !setValue);
+    open.current = !open.current;
+    // setOpen((setValue) => !setValue);
   };
 
   const BURGER_NAVIGATION = useMemo(() => {
-    if (!open) {
+    if (!open.current) {
       return (
         <AiOutlineMenu
           onClick={handlerOpenBurgerNavigation}
@@ -115,7 +117,7 @@ const Header = () => {
           </div>
           <nav
             className={`${"header_content_nav"} 
-         ${open && size.width < 768 ? `${"isMenu"}` : ""} 
+         ${open.current && size.width < 768 ? `${"isMenu"}` : ""} 
          }`}
           >
             <ul>
@@ -144,7 +146,9 @@ const Header = () => {
                     : null}
 
                   {/* Mobile Resolution */}
-                  {size.width < 768 && open ? `Easy Login by Phone` : null}
+                  {size.width < 768 && open.current
+                    ? `Easy Login by Phone`
+                    : null}
                 </button>
               </li>
               <li>
