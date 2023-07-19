@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 import PlaceHolderImage from "../../Assets/Img/placeholder.png";
 // Styled
 import "./moviesList.scss";
+import { Link } from "react-router-dom";
 
 // React Start
 import ReactStars from "react-rating-stars-component";
@@ -32,31 +33,33 @@ const MoviesList = (props) => {
     }
 
     if (props.data.data && !props.data.loading) {
-      return props.data?.data?.map((items, idx) => {
-        return (
-          <div key={idx} className="movie_list_container_card">
-            <LazyLoadImage
-              alt="poster_list_movie"
-              effect="blur"
-              width="250"
-              loading="lazy"
-              height="auto"
-              placeholderSrc={PlaceHolderImage}
-              src={"https://image.tmdb.org/t/p/original/" + items.poster_path}
+      return props.data?.data?.map((items, idx) => (
+        <Link
+          key={idx}
+          className="movie_list_container_card"
+          to={`detail/${items.id}`}
+        >
+          <LazyLoadImage
+            alt="poster_list_movie"
+            effect="blur"
+            width="250"
+            loading="lazy"
+            height="auto"
+            placeholderSrc={PlaceHolderImage}
+            src={"https://image.tmdb.org/t/p/original/" + items.poster_path}
+          />
+          <div className="poster_container">
+            <p>{items.title}</p>
+            <ReactStars
+              count={10}
+              value={items.vote_average}
+              edit={false}
+              size={16}
+              activeColor="#ffd700"
             />
-            <div className="poster_container">
-              <p>{items.title}</p>
-              <ReactStars
-                count={10}
-                value={items.vote_average}
-                edit={false}
-                size={16}
-                activeColor="#ffd700"
-              />
-            </div>
           </div>
-        );
-      });
+        </Link>
+      ));
     }
   }, [props.data]);
 

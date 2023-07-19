@@ -32,8 +32,6 @@ const Home = () => {
     pagination: state.getMovie.pagination,
   }));
 
-  console.log("listAllMovies =>", listAllMovies);
-
   useEffect(() => {
     dispatch(fetchGenreListMovies());
   }, []);
