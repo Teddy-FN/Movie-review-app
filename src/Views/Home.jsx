@@ -59,8 +59,8 @@ const Home = () => {
   };
 
   const LIST_ALL_GENRE = useMemo(() => {
-    const component = DEFAULT_GENRE.map((items) => (
-      <li className="list_items" key={items.id}>
+    const component = DEFAULT_GENRE.map((items, index) => (
+      <li className="list_items" key={index}>
         <button
           onClick={() => onChangeToogle(items)}
           className={`${

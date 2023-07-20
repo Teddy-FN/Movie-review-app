@@ -25,17 +25,17 @@ const MoviesList = (props) => {
     if (props.data.loading) {
       return (
         <div className="skeleton_wrapper">
-          {ARR.map((items) => (
-            <MemoizedSkeletonLoading key={items} />
+          {ARR.map((items, index) => (
+            <MemoizedSkeletonLoading key={index} />
           ))}
         </div>
       );
     }
 
     if (props.data.data && !props.data.loading) {
-      return props.data?.data?.map((items, idx) => (
+      return props.data?.data?.map((items, index) => (
         <Link
-          key={idx}
+          key={index}
           className="movie_list_container_card"
           to={`detail/${items.id}`}
         >

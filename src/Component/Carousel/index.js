@@ -3,6 +3,9 @@ import React, { useEffect, useMemo, memo } from "react";
 import ToogleGenre from "../../UI/ToogleGenre";
 import Container from "../Container";
 
+// PlaceHolder Image
+import PlaceHolderImage from "../../Assets/Img/placeholder.png";
+
 // Styles
 import "./carousel.scss";
 
@@ -66,10 +69,10 @@ const Carousel = (props) => {
           modules={[Autoplay]}
           className="mySwiper"
         >
-          {listCarousel?.data?.map((items, idx) => (
+          {listCarousel?.data?.map((items, index) => (
             <SwiperSlide
               className="carousel"
-              key={idx}
+              key={index}
               style={{
                 height: "140vh",
                 width: "100%",
@@ -86,6 +89,7 @@ const Carousel = (props) => {
               <div className="carousel_content">
                 <LazyLoadImage
                   alt={items.poster_path}
+                  placeholderSrc={PlaceHolderImage}
                   effect="blur"
                   src={`https://image.tmdb.org/t/p/w154/${items.poster_path}`}
                 />

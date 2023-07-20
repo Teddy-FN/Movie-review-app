@@ -2,6 +2,12 @@ import React, { useEffect } from "react";
 // Style
 import "./style.scss";
 
+// Star Rating
+import ReactStars from "react-rating-stars-component";
+
+// PlaceHolder Image
+import PlaceHolderImage from "../../Assets/Img/placeholder.png";
+
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Container from "../../Component/Container";
 
@@ -31,6 +37,14 @@ const Detail = () => {
       data: state.getDetailMovies.data,
       loading: state.getDetailMovies.loading,
       error: state.getDetailMovies.error,
+    };
+  });
+
+  const detailImages = useSelector((state) => {
+    return {
+      data: state.getImageMovie.data,
+      loading: state.getImageMovie.loading,
+      error: state.getImageMovie.error,
     };
   });
 
@@ -107,10 +121,10 @@ const Detail = () => {
               marginBottom: "2rem",
             }}
           >
-            {detailData?.data?.genres?.map((items) => {
+            {detailData?.data?.genres?.map((items, index) => {
               return (
                 <div
-                  key={items.id}
+                  key={index}
                   style={{
                     padding: "1rem 4rem",
                     borderRadius: "30px",
@@ -150,6 +164,27 @@ const Detail = () => {
                 lineHeight: "3rem",
               }}
             >
+              <p>Language : </p>
+              <p>
+                {detailData?.data?.spoken_languages?.map((items, index) => {
+                  if (index !== detailData?.data?.spoken_languages.length - 1) {
+                    return (
+                      <span key={items.iso_639_1}>{items.english_name}, </span>
+                    );
+                  } else {
+                    return items.english_name;
+                  }
+                })}
+              </p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                gap: "20px",
+                borderBottom: "2px solid #000",
+                lineHeight: "3rem",
+              }}
+            >
               <p>Tagline : </p>
               <p>{detailData?.data?.tagline}</p>
             </div>
@@ -175,6 +210,30 @@ const Detail = () => {
               <p>Status : </p>
               <p>{detailData?.data?.status}</p>
             </div>
+
+            {/* Prodeuction */}
+            <div
+              style={{
+                display: "flex",
+                gap: "20px",
+                borderBottom: "2px solid #000",
+                lineHeight: "3rem",
+              }}
+            >
+              <p>Production : </p>
+              {detailData?.data?.production_companies?.map((items, index) => (
+                <LazyLoadImage
+                  key={index}
+                  alt={items.logo_path}
+                  placeholderSrc={PlaceHolderImage}
+                  style={{
+                    height: "100%",
+                  }}
+                  effect="blur"
+                  src={`https://image.tmdb.org/t/p/w154/${items.logo_path}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -199,30 +258,100 @@ const Detail = () => {
             </button>
             <button className="btn btn-more">v</button>
           </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "20px",
+            }}
+          >
+            <ReactStars
+              count={1}
+              value={10}
+              edit={false}
+              size={40}
+              activeColor="#ffd700"
+            />
+            <p
+              style={{
+                fontSize: "2rem",
+              }}
+            >
+              {detailData?.data?.vote_average}
+            </p>
+          </div>
         </div>
+      </section>
+
+      {/* Movie Logos */}
+      <section className="container">
+        <h3>Images Logos</h3>
+        <Swiper
+          slidesPerView={3}
+          spaceBetween={30}
+          // modules={[Pagination]} // if you want to add pagiantion just add modules
+          className="mySwiper"
+        >
+          {detailImages?.data?.logos?.map((items, index) => (
+            <SwiperSlide className="carousel" key={index}>
+              <LazyLoadImage
+                alt={items.file_path}
+                placeholderSrc={PlaceHolderImage}
+                style={{
+                  height: "100%",
+                }}
+                effect="blur"
+                src={`https://image.tmdb.org/t/p/w154/${items.file_path}`}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
 
       {/* Movie Image */}
       <section className="container">
-        <h3>Images</h3>
+        <h3>Images Posters</h3>
         <Swiper
           slidesPerView={3}
           spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Pagination]}
+          // modules={[Pagination]} // if you want to add pagiantion just add modules
           className="mySwiper"
         >
-          <SwiperSlide>Slide 1</SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide>
-          <SwiperSlide>Slide 5</SwiperSlide>
-          <SwiperSlide>Slide 6</SwiperSlide>
-          <SwiperSlide>Slide 7</SwiperSlide>
-          <SwiperSlide>Slide 8</SwiperSlide>
-          <SwiperSlide>Slide 9</SwiperSlide>
+          {detailImages?.data?.posters?.map((items, index) => (
+            <SwiperSlide className="carousel" key={index}>
+              <LazyLoadImage
+                alt={items.file_path}
+                placeholderSrc={PlaceHolderImage}
+                style={{
+                  height: "100%",
+                }}
+                effect="blur"
+                src={`https://image.tmdb.org/t/p/w154/${items.file_path}`}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
+
+      {/* Image Backdrops */}
+      <section className="container">
+        <h3>Images Backdrops</h3>
+        <Swiper
+          slidesPerView={3}
+          spaceBetween={30}
+          // modules={[Pagination]} // if you want to add pagiantion just add modules
+          className="mySwiper"
+        >
+          {detailImages?.data?.backdrops?.map((items, index) => (
+            <SwiperSlide className="carousel" key={index}>
+              <LazyLoadImage
+                alt={items.file_path}
+                placeholderSrc={PlaceHolderImage}
+                effect="blur"
+                src={`https://image.tmdb.org/t/p/w154/${items.file_path}`}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </section>
     </Container>
