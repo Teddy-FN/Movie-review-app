@@ -25,8 +25,12 @@ export const getMovieImage = createSlice({
     },
 
     getImageMovie: (state, payload) => {
-      console.log("PAYLOAD =>", payload);
-      // state.data = [...payload.payload];
+      const { backdrops, logos, posters } = payload.payload;
+      state.data = {
+        backdrops: backdrops,
+        logos: logos,
+        posters: posters,
+      };
     },
   },
 });
@@ -44,7 +48,6 @@ export const fetchImageMovie = (id) => async (dispatch) => {
     const getImageData = await URL_API.get(`/3/movie/${id}/images`);
     console.log("getImageData =>", getImageData);
     if (getImageData.status === 200) {
-      console.log(getImageData);
       dispatch(loadingGetImage("loading"));
       setTimeout(() => {
         dispatch(loadingGetImage("succeeded"));
