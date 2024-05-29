@@ -22,7 +22,6 @@ import { useSelector, useDispatch } from "react-redux";
 // Swiper
 
 // Import Swiper React components
-import { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
