@@ -52,7 +52,7 @@ const Detail = () => {
       dispatch(fetchDetailMovie(id));
       dispatch(fetchImageMovie(id));
     }
-  }, [id]);
+  }, [dispatch, id]);
 
   return (
     <Container>

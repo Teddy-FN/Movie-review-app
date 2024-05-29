@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useEffect, useMemo } from "react";
 // Styled
 import "./style.scss";
@@ -35,7 +34,7 @@ const Genre = () => {
       dispatch(fetchGenreListMovies());
       dispatch(fetchGenreListTelevision());
     };
-  }, []);
+  }, [dispatch]);
 
   const CONTENT_GENRE_MOVIES = useMemo(() => {
     if (listAllGenreMovie.loading) {
