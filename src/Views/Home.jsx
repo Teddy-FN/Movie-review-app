@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useMemo, useEffect, useState } from "react";
 import { MemoizedCarousel } from "../Component/Carousel";
 import MoviesList from "../UI/MoviesList";
@@ -39,7 +38,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchAllListMovie(toogle));
-  }, [toogle]);
+  }, [dispatch, toogle]);
 
   const onChangeToogle = (item) =>
     setToogle(() => {
