@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useEffect, useMemo } from "react";
 // Styled
 import "./style.scss";
